@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>A Small Question ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
+    position:relative;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    color:white;
+    animation:float 8s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) scale(0);
+    }
+    100%{
+        transform:translateY(-10vh) scale(1.5);
+    }
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:30px;
+    padding:50px 30px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    color:white;
+    animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.typing{
+    font-size:1.2rem;
+    min-height:60px;
+    margin-bottom:40px;
+    font-weight:300;
+}
+
+.buttons{
+    position:relative;
+    height:180px;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    font-size:1.2rem;
+    cursor:pointer;
+    transition:0.3s;
+    position:absolute;
+}
+
+#yesBtn{
+    left:30%;
+    background:white;
+    color:#ff4f81;
+    font-weight:bold;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+#yesBtn:hover{
+    transform:scale(1.1);
+}
+
+#noBtn{
+    right:30%;
+    background:#ff4f81;
+    color:white;
+    font-weight:bold;
+}
+
+.finalMessage{
+    display:none;
+    margin-top:30px;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0.5);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.finalMessage h2{
+    font-size:2.5rem;
+    margin-bottom:15px;
+}
+
+.finalMessage p{
+    font-size:1.2rem;
+}
+
+.couple{
+    width:220px;
+    margin-top:20px;
+    border-radius:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hey You ❤️</h1>
+
+    <div class="typing" id="typing"></div>
+
+    <div class="buttons" id="buttons">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div class="finalMessage" id="finalMessage">
+        <h2>Yayyyyy 💕</h2>
+        <p>
+            I promise to annoy you, care for you,  
+            and love you forever ♾️❤️
+        </p>
+
+        <img class="couple"
+        src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    </div>
+
+</div>
+
+<script>
+
+const text = "I may not be perfect with words... but my heart always chooses you ❤️";
+let i = 0;
+
+function typingEffect(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typingEffect,50);
+    }
+}
+
+typingEffect();
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+
+    const x = Math.floor(Math.random() * 300);
+    const y = Math.floor(Math.random() * 120);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+document.getElementById("yesBtn").addEventListener("click", () => {
+
+    document.getElementById("buttons").style.display = "none";
+
+    document.getElementById("finalMessage").style.display = "block";
+
+    createLoveFile();
+});
+
+function createLoveFile(){
+
+    const text = `
+She said YES ❤️
+
+This is officially the beginning
+of our cute little love story 💕
+`;
+
+    const blob = new Blob([text], {type:"text/plain"});
+
+    const a = document.createElement("a");
+
+    a.href = URL.createObjectURL(blob);
+
+    a.download = "LoveStory.txt";
+
+    a.click();
+}
+
+/* Floating Hearts */
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.fontSize = Math.random() * 25 + 15 + "px";
+
+    heart.style.animationDuration = Math.random() * 5 + 5 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
